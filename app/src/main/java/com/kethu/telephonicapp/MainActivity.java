@@ -60,42 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            samsungTwoSims();
+
         }
     }
 
-    public  void samsungTwoSims() {
-        TelephonyManager telephony = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
 
-        try{
-            if (!PermissionChecker.checkPermission(MainActivity.this, READ_PERMISSIONS))
-                PermissionChecker.reqPermissions(MainActivity.this, READ_PERMISSIONS);
-
-
-
-
-            Class<?> telephonyClass = Class.forName(telephony.getClass().getName());
-
-            Class<?>[] parameter = new Class[1];
-            parameter[0] = int.class;
-            Method getFirstMethod = telephonyClass.getMethod("getDefault", parameter);
-
-            Log.e(TAG, getFirstMethod.toString());
-
-            Object[] obParameter = new Object[1];
-            obParameter[0] = 0;
-            TelephonyManager first = (TelephonyManager) getFirstMethod.invoke(null, obParameter);
-
-            Log.e(TAG, "Device Id: " + first.getDeviceId() + ", device status: " + first.getSimState() + ", operator: " + first.getNetworkOperator() + "/" + first.getNetworkOperatorName());
-
-            obParameter[0] = 1;
-            TelephonyManager second = (TelephonyManager) getFirstMethod.invoke(null, obParameter);
-
-            Log.e(TAG, "Device Id: " + second.getDeviceId() + ", device status: " + second.getSimState()+ ", operator: " + second.getNetworkOperator() + "/" + second.getNetworkOperatorName());
-        } catch (Exception e) {
-           // e.printStackTrace();
-
-           // Log.e(TAG,"Exception "+e.getMessage());
-        }
-    }
 }
